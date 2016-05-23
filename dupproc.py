@@ -10,21 +10,21 @@ from finddup import print_err
 def main(args):
     hash_dict = json.loads(args.input.read())
 
-    def oprint(content):
+    def print_out(content):
         print(content, file=args.output)
 
-    oprint('<html><body>\n')
+    print_out('<html><body>\n')
 
     dup_count = 0
     for key, group in hash_dict.items():
         count = len(group)
         if count > 1:
             dup_count += count
-            oprint('<hr/>')
+            print_out('<hr/>')
             for info in group:
-                oprint('<div><img width="150px" src="file://%(path)s" /> Path: %(path)s Size: %(size)s</div>' % info)
+                print_out('<div><img width="150px" src="file://%(path)s" /> Path: %(path)s Size: %(size)s</div>' % info)
 
-    oprint('</body></html>')
+    print_out('</body></html>')
     print_err('Total %s images. %s duplictes' % (len(hash_dict), dup_count))
 
 if __name__ == '__main__':
