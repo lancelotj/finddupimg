@@ -21,7 +21,7 @@ def get_file_size(file_name):
 
 
 def get_image_size(img):
-    return "{} x {}".format(*img.size)
+    return "%s x %s" % img.size
 
 
 def is_image(thefile):
