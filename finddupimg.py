@@ -71,12 +71,6 @@ def main(args):
     ) for info in sorted(
         src_dict.items(),
         key=lambda d: len(d[1])))
-
-    for hash_str, dups in output.items():
-        count = len(dups)
-        if count > 1:
-            dup_count += count
-
     print(json.dumps(output, indent=2), file=args.output)
 
 if __name__ == '__main__':
