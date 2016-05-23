@@ -12,7 +12,7 @@ from collections import defaultdict
 from PIL import Image, ExifTags
 
 
-def printerr(content):
+def print_err(content):
     print(content, file=sys.stderr)
 
 
@@ -57,7 +57,7 @@ def main(args):
         for path in args.dirs:
             for dup_info in walk_images(path):
                 total += 1
-                printerr('Processing %s.' % dup_info['path'])
+                print_err('Processing %s.' % dup_info['path'])
                 src_dict[dup_info['hash']].append({
                     'path': dup_info['path'],
                     'size': dup_info['size'],
@@ -65,7 +65,7 @@ def main(args):
                 })
     except KeyboardInterrupt:
         pass
-    printerr('\n%d files processed.' % total)
+    print_err('\n%d files processed.' % total)
     output = collections.OrderedDict((
         info[0], sorted(info[1], key=itemgetter('size'), reverse=True)
     ) for info in sorted(
@@ -81,7 +81,8 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description=('Looking up a director to see if there are duplicated file'))
+        description=(
+            'Looking up a directory to see if there are duplicated file.'))
     parser.add_argument('dirs', nargs='+', help='Target directories')
     parser.add_argument(
         '-v', '--verbose', action='store_false', help='More information')
